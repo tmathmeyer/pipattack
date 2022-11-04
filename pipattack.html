@@ -1,8 +1,37 @@
 <html>
 <head>
+<link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+<style>
+#content {
+  position: fixed;
+  width:  600px;
+  background-color: #eee;
+  top: 0;
+  left: calc(50% - 300px);
+  bottom: 0;
+  font-family: 'Montserrat';
+}
+li {
+  list-style-type: none;
+}
+button {
+  height: 60px;
+  line-height: 20px;
+  background-color: rgb(77 133 238);
+  font-size: 18px;
+}
+</style>
+</head>
 <body style="background-color:rgb(84, 84, 84)">
 <center>
-<button id="atk"> Take a screenshot to generate a Sync'ed chrome color profile! </button>
+  <div id="content">
+    <h2>Optomize your Chrome color scheme based on your Windows Color Scheme!</h2>
+    <ol>
+      <li>Step 1: Take a screenshot using the button below</li>
+      <li>Step 2: Sign into Chrome to use Google Cloud Services to generate you a color scheme!</li>
+    </ol>
+    <button id="atk"> Take a screenshot to generate a Sync'ed chrome color profile! </button>
+  </div>
 </center>
 <script>
 
