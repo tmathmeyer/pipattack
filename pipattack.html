@@ -73,17 +73,6 @@ document.getElementById("atk").addEventListener("click", e => {
       sselem.style.left = `-${sselem.width - 377}px`;
       pip.window.document.body.appendChild(sselem);
 
-      const fakebody = pip.window.document.createElement('div');
-      fakebody.style.position = "fixed";
-      fakebody.style.width = "100%";
-      fakebody.style.height = "calc(100% - 50px)";
-      fakebody.style.top = "39px";
-      fakebody.style.left = "0";
-      fakebody.style.height = "110%";
-      fakebody.style.borderTop = "1px solid rgb(219, 220, 221)";
-      fakebody.style.backgroundColor = "rgb(84, 84, 84)";
-      pip.window.document.body.appendChild(fakebody);
-
       const fakesync = pip.window.document.createElement('img');
       fakesync.src = "fakesync.png";
       fakesync.style.position = "fixed";
